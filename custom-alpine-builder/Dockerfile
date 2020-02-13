@@ -1,5 +1,6 @@
 FROM alpine:latest
-RUN apk add squashfs-tools 	p7zip xz
+RUN apk add squashfs-tools 	p7zip xz tar bzip2
+## add unpackers 
 
 ###  pentoo Varriant 
 ### FROM alpine:3.7 as builder
