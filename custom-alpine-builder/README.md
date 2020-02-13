@@ -6,9 +6,12 @@ I needed a multistage builder with just a few extra tools ie unzip /unsquash cra
 Like Live Cd iso's etc.. 
 
 in my use case Gentoo Varriants.. for now i've stuck here. 
+WORKDIR /gentoo
+ie needing the epherial chroot of docker and or means of tweaking iso more to my liking woithout a hudge mess. 
 add ios /sometemp 
 
 7z x /sometemp/my.iso /
+rm *.trashes... 
 
 unsquashfs -f -d /mydistro  /sometemp/file.squashfs
 
