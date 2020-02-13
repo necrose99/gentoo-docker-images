@@ -18,8 +18,9 @@ https://hub.docker.com/u/gentoo/
 * stage3
   * stage3-amd64
     * stage3-amd64-hardened
-    * stage3-amd64-nomultilib
     * stage3-amd64-hardened-nomultilib
+    * stage3-amd64-nomultilib
+    * stage3-amd64-systemd
   * stage3-x86
     * stage3-x86-hardened
 
@@ -34,7 +35,7 @@ The container being built is defined by the TARGET environment variable:
 
 ```
 docker create -v /usr/portage --name myportagesnapshot gentoo/portage:latest /bin/true
-docker run --volumes-from myportagesnapshot gentoo/stage3-amd64:latest /bin/bash
+docker run --interactive --tty --volumes-from myportagesnapshot gentoo/stage3-amd64:latest /bin/bash
 ```
 
 # Using the portage container in a multi-stage build
@@ -51,7 +52,7 @@ FROM gentoo/portage:latest as portage
 FROM gentoo/stage3-amd64:latest
 
 # copy the entire portage volume in
-COPY --from=portage /usr/portage /usr/portage
+COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 
 # continue with image build ...
 RUN emerge -qv www-servers/apache # or whichever packages you need
